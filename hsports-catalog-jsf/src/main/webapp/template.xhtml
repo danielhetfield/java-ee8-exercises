@@ -11,6 +11,13 @@ body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 14px;
 }
+.table {
+	border: 1px solid #CAD6E0;
+	text-align: center;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .header {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -28,8 +35,7 @@ body {
 	<h:outputStylesheet library="css" name="global.css"></h:outputStylesheet>
 </h:head>
 <body bgcolor="#ffffff">
-	<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0"
-		cellspacing="0" border="0" width="400">
+	<table class="table">
 		<tbody>
 			<tr>
 				<td class="header" height="42" align="center" valign="middle"
@@ -41,8 +47,7 @@ body {
 			</tr>
 			<tr>
 				<td width="100%" colspan="2">
-					<table width="100%" style="height: 150px" align="left"
-						cellpadding="0" cellspacing="0" border="0">
+					<table class="table">
 						<tbody>
 							<tr>
 								<td><h:graphicImage library="img"
