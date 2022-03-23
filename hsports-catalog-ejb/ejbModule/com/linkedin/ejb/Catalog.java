@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
 
 /**
  * Session Bean implementation class Catalog
@@ -20,7 +19,7 @@ public class Catalog implements CatalogLocal {
      * Default constructor. 
      */
     public Catalog() {
-        // TODO Auto-generated constructor stub
+
     }
 
 	@Override
