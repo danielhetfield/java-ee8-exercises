@@ -2,19 +2,34 @@ package com.linkedin.ejb;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CATALOG_ITEM")
 public class CatalogItem {
 
+	@Id
+	@Column(name="ITEM_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long itemId;
+	@Column(name="NAME")
 	private String name;
+	@Column(name="MANUFACTURER")
 	private String manufacturer;
+	@Column(name="AVAIL_DATE")
 	private LocalDate availableDate;
+	@Column(name="DESCRIPTION")
 	private String description;
 
 	public CatalogItem() {}
 	
-	public CatalogItem(Long itemId, String name, String manufacturer, String description, LocalDate availableDate) {
+	public CatalogItem(String name, String manufacturer, String description, LocalDate availableDate) {
 		super();
-		this.itemId = itemId;
 		this.name = name;
 		this.manufacturer = manufacturer;
 		this.description = description;

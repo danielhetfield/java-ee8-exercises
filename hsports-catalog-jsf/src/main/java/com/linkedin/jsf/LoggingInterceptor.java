@@ -9,7 +9,6 @@ import javax.interceptor.InvocationContext;
 public class LoggingInterceptor {
 
 	public LoggingInterceptor() {
-		// TODO Auto-generated constructor stub
 	}
 	//This AroundInvoke annotation is the one being triggered and intercepted.
 	//ic refers to the actual method being invoked

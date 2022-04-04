@@ -1,6 +1,6 @@
 package com.linkedin.jsf;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@SessionScoped
+@RequestScoped
 @Named
 public class CatalogItemFormBean implements Serializable {
 	private static final long serialVersionUID = -3563337822452565118L;
@@ -22,8 +22,7 @@ public class CatalogItemFormBean implements Serializable {
 	private CatalogItem item = new CatalogItem();
 	private List<CatalogItem> itemsList = new ArrayList<>();
 	public String addItem() {
-		long itemId = this.catalogBean.getItems().size() + 1;
-		this.catalogBean.addItem(new CatalogItem(itemId, this.item.getName(), this.item.getManufacturer(), this.item.getDescription(), this.item.getAvailableDate()));
+		this.catalogBean.addItem(new CatalogItem(this.item.getName(), this.item.getManufacturer(), this.item.getDescription(), this.item.getAvailableDate()));
 		//NEW ROW
 		this.inventoryService.createItem(this.item.getItemId(), this.item.getName());
 		return "list?faces-redirect=true";

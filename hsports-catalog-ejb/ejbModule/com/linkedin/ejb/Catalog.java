@@ -1,19 +1,21 @@
 package com.linkedin.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
-import javax.ejb.Singleton;
+import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class Catalog
  */
-@Singleton
-@LocalBean
+@RequestScoped
+@LocalBean	
 public class Catalog implements CatalogLocal {
-	private List<CatalogItem> items = new ArrayList<>();
 	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
     /**
      * Default constructor. 
@@ -24,12 +26,12 @@ public class Catalog implements CatalogLocal {
 
 	@Override
 	public List<CatalogItem> getItems() {
-		return items;
+		return this.entityManager.createQuery("select c from CatalogItem c",CatalogItem.class).getResultList();
 	}
 
 	@Override
 	public void addItem(CatalogItem item) {
-		items.add(item);		
+		this.entityManager.persist(item);		
 	}
 
 }
