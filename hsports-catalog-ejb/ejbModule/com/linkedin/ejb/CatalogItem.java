@@ -1,41 +1,59 @@
 package com.linkedin.ejb;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CATALOG_ITEM")
+@Table(name = "CATALOG_ITEM")
 public class CatalogItem {
 
 	@Id
-	@Column(name="ITEM_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "CATALOG_ITEM_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long itemId;
-	@Column(name="NAME")
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(joinColumns = @JoinColumn(name="CATALOG_ITEM_ID")
+		, inverseJoinColumns = @JoinColumn(name="ITEM_MANAGER_ID"))
+	private List<ItemManager> itemManagers = new ArrayList<>();
+
+	@Column(name = "NAME")
 	private String name;
-	@Column(name="MANUFACTURER")
+
+	@Column(name = "MANUFACTURER")
 	private String manufacturer;
-	@Column(name="AVAIL_DATE")
-	private LocalDate availableDate;
-	@Column(name="DESCRIPTION")
+
+	@Column(name = "DESCRIPTION")
 	private String description;
 
-	public CatalogItem() {}
-	
+	@Column(name = "AVAILABLE_DATE")
+	private LocalDate availableDate;
+
+	public CatalogItem() {
+
+	}
+
 	public CatalogItem(String name, String manufacturer, String description, LocalDate availableDate) {
 		super();
 		this.name = name;
 		this.manufacturer = manufacturer;
 		this.description = description;
-		this.availableDate = availableDate;		
+		this.availableDate = availableDate;
 	}
-	
+
 	public Long getItemId() {
 		return itemId;
 	}
@@ -60,6 +78,14 @@ public class CatalogItem {
 		this.manufacturer = manufacturer;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public LocalDate getAvailableDate() {
 		return availableDate;
 	}
@@ -68,12 +94,18 @@ public class CatalogItem {
 		this.availableDate = availableDate;
 	}
 
-	public String getDescription() {
-		return description;
+	public List<ItemManager> getItemManagers() {
+		return itemManagers;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setItemManagers(List<ItemManager> itemManagers) {
+		this.itemManagers = itemManagers;
+	}
+
+	@Override
+	public String toString() {
+		return "CatalogItem [itemId=" + itemId + ", name=" + name + ", manufacturer=" + manufacturer + ", description="
+				+ description + ", availableDate=" + availableDate + "]";
 	}
 
 }

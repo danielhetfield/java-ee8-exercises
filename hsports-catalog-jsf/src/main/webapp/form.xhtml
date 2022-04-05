@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html">
-	<ui:composition template="/template.xhtml">
-		<ui:define name="pageHeader">
-			<h:link value="#{msg['form.pageTitle']}" outcome="form" />
-			<h:link value="#{msg['list.pageTitle']}" outcome="list" />
-		</ui:define>		
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="pageHeader">
+		<h:link value="#{msg['form.pageTitle']}" outcome="form"/> |
+		<h:link value="#{msg['list.pageTitle']}" outcome="list"/>
+	</ui:define>
 	<ui:define name="body">
 		<h:outputScript library="js" name="shake.js"></h:outputScript>
 		<h:form id="item-form">
@@ -32,5 +36,5 @@
 			<h:commandButton value="Submit" action="#{catalogItemFormBean.addItem()}"/>
 		</h:form>
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>
