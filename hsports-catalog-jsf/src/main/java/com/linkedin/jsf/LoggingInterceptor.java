@@ -8,9 +8,7 @@ import javax.interceptor.InvocationContext;
 @Interceptor
 public class LoggingInterceptor {
 
-	public LoggingInterceptor() {
-		// TODO Auto-generated constructor stub
-	}
+	public LoggingInterceptor() {}
 
 	@AroundInvoke
 	public Object aroundInvoke(InvocationContext ic) throws Exception {

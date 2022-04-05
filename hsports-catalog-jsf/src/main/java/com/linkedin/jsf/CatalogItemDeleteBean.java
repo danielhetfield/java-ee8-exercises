@@ -1,9 +1,6 @@
 package com.linkedin.jsf;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;

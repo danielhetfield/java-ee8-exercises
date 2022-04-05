@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
 
 @ApplicationScoped
 public class LocalInventoryService implements InventoryService {

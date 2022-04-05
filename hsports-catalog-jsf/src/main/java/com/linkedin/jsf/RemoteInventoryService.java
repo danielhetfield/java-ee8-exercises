@@ -11,7 +11,8 @@ import javax.enterprise.inject.Alternative;
 @RemoteService
 @Alternative
 public class RemoteInventoryService implements InventoryService {
-
+	
+	private static final long serialVersionUID = 1846773733313939206L;
 	private Map<Long, InventoryItem> items = new HashMap<Long, InventoryItem>();
 
 	@Override
@@ -30,7 +31,6 @@ public class RemoteInventoryService implements InventoryService {
 
 	@Override
 	public Long getQuantity(Long catalogItemId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

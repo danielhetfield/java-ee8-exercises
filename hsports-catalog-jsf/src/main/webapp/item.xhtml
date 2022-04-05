@@ -43,20 +43,33 @@
 				<h:outputText value="${catalogItemDetailBean.item.itemManagers[status.index].lastName}" />
 				<br />
 			</ui:repeat>
-		</h:panelGroup>
-		
-		<h:form>
+		</h:panelGroup>		
+			<h:form id="managerForm">
 			<h3>Add an Item Manager</h3>
 			<div>
-				<h:outputLabel value="First Name" />
-				<h:inputText id="firstName" value="#{catalogItemDetailBean.manager.firstName}"></h:inputText>
-				<br />
-				<br />
-				<h:outputLabel value="Last Name" />
-				<h:inputText id="lastName" value="#{catalogItemDetailBean.manager.lastName}"></h:inputText>
+				<div class="errorMessage">
+					<h:messages />
+				</div>
+				<div>
+					<h:outputLabel value="First Name" />
+					<h:inputText id="firstName"
+						value="#{catalogItemDetailBean.manager.firstName}"></h:inputText>
+				</div>
+				<div>
+					<h:outputLabel value="Last Name" />
+					<h:inputText id="lastName"
+						value="#{catalogItemDetailBean.manager.lastName}"></h:inputText>
+				</div>
+				<div>
+					<h:outputLabel value="Email" />
+					<h:inputText id="email"
+						value="#{catalogItemDetailBean.manager.email}"></h:inputText>
+				</div>
 			</div>
-			<h:commandButton value="Submit" action="#{catalogItemDetailBean.addManager()}">
-				<f:ajax execute="firstName lastName" render="managerList" />
+			<h:commandButton value="Submit"
+				action="#{catalogItemDetailBean.addManager()}">
+				<f:ajax execute="firstName lastName email"
+					render="managerList managerForm" />
 			</h:commandButton>
 		</h:form>
 	</ui:define>

@@ -17,6 +17,8 @@ import com.linkedin.ejb.ItemManager;
 @ConversationScoped
 public class CatalogItemDetailBean implements Serializable {
 	
+	private static final long serialVersionUID = -8830949673033293843L;
+
 	private long itemId;
 
 	private CatalogItem item;

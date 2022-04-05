@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "ITEM_MANAGER")
@@ -28,6 +29,19 @@ public class ItemManager {
 
 	@Column(name = "LAST_NAME")
 	private String lastName;
+
+	//Email constraint
+	@Email
+	@Column(name = "EMAIL")
+	private String email;
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Long getItemManagerId() {
 		return itemManagerId;

@@ -2,8 +2,6 @@ package com.linkedin.jsf;
 
 import java.time.LocalDateTime;
 
-import javax.enterprise.inject.Produces;
-
 public class InventoryServiceFactory {
 
 	public InventoryService createInstance() {

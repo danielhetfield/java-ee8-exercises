@@ -15,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "CATALOG_ITEM")
@@ -25,20 +29,29 @@ public class CatalogItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long itemId;
 
+	@Size(min=0, max=3) //Max 3 items per manage
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(joinColumns = @JoinColumn(name="CATALOG_ITEM_ID")
 		, inverseJoinColumns = @JoinColumn(name="ITEM_MANAGER_ID"))
 	private List<ItemManager> itemManagers = new ArrayList<>();
 
+	//Not blank, not null, not whitespace
+	@NotBlank 
 	@Column(name = "NAME")
 	private String name;
 
+	//Custom validator and constraint to allow only a specific list
+	@PermittedManufacturers
 	@Column(name = "MANUFACTURER")
 	private String manufacturer;
 
+	//Pattern to allow only letters and 5 to 10 characters
+	@Pattern(regexp = "^[A-Za-z]{5,10}$", message = "Must be letters")
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	//Only future date
+	@Future
 	@Column(name = "AVAILABLE_DATE")
 	private LocalDate availableDate;
 

@@ -1,6 +1,5 @@
 package com.linkedin.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -18,11 +17,6 @@ public class Catalog implements CatalogLocal {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	private List<CatalogItem> items = new ArrayList<>();
-
-	/**
-	 * Default constructor.
-	 */
 	public Catalog() {
 	}
 
