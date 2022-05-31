@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>hsports-catalog-eap</name>
+	<name>hsports-catalog</name>
 	<comment></comment>
 	<projects>
 		<project>hsports-catalog-jsf</project>
 		<project>hsports-catalog-ejb</project>
+		<project>hsports-catalog-jax</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
