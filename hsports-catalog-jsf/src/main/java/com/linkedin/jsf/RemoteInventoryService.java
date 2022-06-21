@@ -1,6 +1,7 @@
 package com.linkedin.jsf;
 
 import java.util.Random;
+import java.util.concurrent.Future;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.client.Client;
@@ -40,6 +41,17 @@ public class RemoteInventoryService implements InventoryService {
 			.request().get(InventoryItem.class);		
 		
 		return invItem.getQuantity();
+	}
+
+
+	@Override
+	public Future<InventoryItem> asyncGetQuantity(Long catalogItemId) {
+		//Sample implementation of async method with JAX-RS
+		Client client = ClientBuilder.newClient();
+		
+		return client.target(apiUrl).path("inventoryitems").path("catalog").path("{catalogItemId}")
+				.resolveTemplate("catalogItemId",catalogItemId.toString())
+				.request().async().get(InventoryItem.class);		
 	}
 
 }

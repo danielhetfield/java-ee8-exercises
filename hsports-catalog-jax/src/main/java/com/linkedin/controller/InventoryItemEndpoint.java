@@ -18,6 +18,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -58,6 +60,25 @@ public class InventoryItemEndpoint {
 
 	@GET
 	@Path("/catalog/{catalogItemId}")
+	public void asyncFindByCatalogId(@NotNull @PathParam("catalogItemId") Long catalogItemId, @Suspended AsyncResponse asyncRes) {
+		//Added @Suspended and Async Response to method signature
+		//Async Methods return nothing
+		new Thread() {
+			public void run() {
+				try {
+					//Wait 5 seconds to simulate long running transaction
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//When ready to proceed call the method below.
+				asyncRes.resume(findByCatalogId(catalogItemId));
+			}
+		}.start();
+	}
+	
+	//JAX-RS Annotations were removed here on purpose due to async method above.
 	public InventoryItem findByCatalogId(@NotNull @PathParam("catalogItemId") Long catalogItemId) {
 		
 		TypedQuery<InventoryItem> query = this.entityManager
@@ -69,7 +90,7 @@ public class InventoryItemEndpoint {
 	
 		return item; 
 	}
-
+	
 	@GET
 	public List<InventoryItem> listAll(@QueryParam("start") final Integer startPosition, @QueryParam("max") final Integer maxResult) {
 		TypedQuery<InventoryItem> query = this.entityManager.createQuery("select i from InventoryItem i", InventoryItem.class);
