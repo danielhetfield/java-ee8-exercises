@@ -17,12 +17,18 @@ import com.linkedin.ejb.ItemManager;
 @ConversationScoped
 public class CatalogItemDetailBean implements Serializable {
 	
-	private static final long serialVersionUID = -8830949673033293843L;
+	private static final long serialVersionUID = 4092442620941824597L;
 
 	private long itemId;
 
 	private CatalogItem item;
+	
+	private Long quantity;
 
+	@Inject
+	@RemoteService
+	private InventoryService inventoryService;
+	
 	@Inject
 	private Conversation conversation;
 	
@@ -33,6 +39,7 @@ public class CatalogItemDetailBean implements Serializable {
 
 	public void fetchItem() {
 		this.item = this.catalogBean.findItem(this.itemId);
+		this.quantity = this.inventoryService.getQuantity(this.itemId);
 	}
 	
 	public void addManager() {
@@ -77,6 +84,21 @@ public class CatalogItemDetailBean implements Serializable {
 		this.manager = manager;
 	}
 
-	
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+	public InventoryService getInventoryService() {
+		return inventoryService;
+	}
+
+	public void setInventoryService(InventoryService inventoryService) {
+		this.inventoryService = inventoryService;
+	}
+
 }
 

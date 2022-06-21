@@ -54,6 +54,7 @@ public class CatalogItem {
 	@Future
 	@Column(name = "AVAILABLE_DATE")
 	private LocalDate availableDate;
+	
 
 	public CatalogItem() {
 
@@ -111,6 +112,7 @@ public class CatalogItem {
 		return itemManagers;
 	}
 
+	
 	public void setItemManagers(List<ItemManager> itemManagers) {
 		this.itemManagers = itemManagers;
 	}
