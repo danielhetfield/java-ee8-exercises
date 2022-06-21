@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Alternative;
 
 @ApplicationScoped
+@Alternative
 public class LocalInventoryService implements InventoryService {
 
 	private static final long serialVersionUID = 7537143093264901851L;

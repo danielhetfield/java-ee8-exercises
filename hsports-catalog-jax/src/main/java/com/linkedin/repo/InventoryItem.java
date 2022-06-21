@@ -1,4 +1,4 @@
-package com.linkedin;
+package com.linkedin.repo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

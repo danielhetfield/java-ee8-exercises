@@ -1,36 +1,38 @@
 package com.linkedin.jsf;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Response;
 
 @ApplicationScoped
 @RemoteService
-@Alternative
 public class RemoteInventoryService implements InventoryService {
+
+	private static final long serialVersionUID = 5094496988894627879L;
 	
-	private static final long serialVersionUID = 1846773733313939206L;
-	private Map<Long, InventoryItem> items = new HashMap<Long, InventoryItem>();
+	private String apiUrl = "http://localhost:8080/hsports-catalog-jax/hsports/api/";
 
 	@Override
 	public void createItem(Long catalogItemId, String name) {
-		long inventoryItemId = items.size() + 1;
-		this.items.put(inventoryItemId, new InventoryItem(inventoryItemId, catalogItemId, name, 0L));
-		this.printInventory();
-	}
-
-	public void printInventory() {
-		System.out.println("Remote inventory contains:");
-		for (Entry<Long, InventoryItem> entry : this.items.entrySet()) {
-			System.out.println(entry.getValue().getName());
-		}
-	}
-
+		
+		Client client = ClientBuilder.newClient();
+		Response response = client.target(apiUrl)
+			.path("inventoryitems")
+			.request()
+			.post(Entity.json(new InventoryItem(null, catalogItemId, name, (long) new Random().nextInt(10))));
+		
+		System.out.println(response.getStatus());
+		System.out.println(response.getLocation().getPath());
+	}	
+	
+	
 	@Override
 	public Long getQuantity(Long catalogItemId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
